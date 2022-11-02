@@ -111,7 +111,7 @@ namespace P4CS
 
         public static void SQRT()
         {
-            Console.WriteLine("sqrt hi");
+            Console.WriteLine("sqrt");
         }
 
         public static void EncryptText()
