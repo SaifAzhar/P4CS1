@@ -1,0 +1,15 @@
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\bin\Debug\net6.0\P4CS.exe
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\bin\Debug\net6.0\P4CS.deps.json
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\bin\Debug\net6.0\P4CS.runtimeconfig.json
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\bin\Debug\net6.0\P4CS.dll
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\bin\Debug\net6.0\P4CS.pdb
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\P4CS.csproj.AssemblyReference.cache
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\P4CS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\P4CS.AssemblyInfoInputs.cache
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\P4CS.AssemblyInfo.cs
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\P4CS.csproj.CoreCompileInputs.cache
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\P4CS.dll
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\refint\P4CS.dll
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\P4CS.pdb
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\P4CS.genruntimeconfig.cache
+C:\Users\saifa\OneDrive\Documents\P4CS\P4CS\obj\Debug\net6.0\ref\P4CS.dll
