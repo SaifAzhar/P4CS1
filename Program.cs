@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
+// push code to github
 
 using System.Diagnostics;
-using System.Linq;
 
 namespace P4CS
 {
@@ -117,14 +117,51 @@ namespace P4CS
 
         static void SQRT()
         {
-            Console.WriteLine("sqrt ");
+            Console.WriteLine("Square Root Calculator");
+            Console.WriteLine("--------------------");
+
+
+            Console.WriteLine("Please enter a positive integer: ");
+            int userInteger = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("How many decimal places do you want the solution to be calculated to?");
+            int userChoiceDecimalPlace = int.Parse(Console.ReadLine());
+
+            double upperBound = userInteger;
+            double lowerBound = 1;
+            double average = 0;
+            
+            Console.WriteLine("Loop SQRT");
+
+            while (true)
+            {
+                average = ((upperBound + lowerBound) / 2);
+                average *= average;
+
+                if (average > userInteger)
+                {
+                    upperBound = average;
+                }
+                else if (average < userInteger)
+                {
+                    lowerBound = average;
+                }
+                
+                Console.WriteLine(average);
+                
+                if ((upperBound - lowerBound) < userChoiceDecimalPlace)
+                {
+                    break;
+                }
+            } 
         }
 
         static void EncryptText()
         {
             // convert acceptedSymbols to char[] 'A' 'B' 
             // string to char[]
-            char[] acceptedSymbols = {
+            char[] acceptedSymbols =
+            {
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
                 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '
             }; // array to contain all the symbols which we can accept
@@ -133,39 +170,91 @@ namespace P4CS
             Console.WriteLine("------------");
             Console.WriteLine("Please enter text to encrypt: ");
             string userInput = Console.ReadLine();
-            Console.WriteLine("Please enter key: ");
-            int key = int.Parse((Console.ReadLine())); 
+            Console.WriteLine("Please enter key between 1 and 36: ");
+            int key = int.Parse((Console.ReadLine()));
+
+            while (true)
+            {
+                if (key > 0 && key < 37) break;
+                Console.WriteLine("Please enter a number within the valid range: ");
+                key = int.Parse((Console.ReadLine()));
+            }
+
+
             char[] charArray = userInput.ToUpper().ToCharArray();
             string encrypted = "";
-            
+
+
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                char currentCharacter = charArray[i];
+
+
+                if (acceptedSymbols.Contains(currentCharacter))
+                {
+                    char newChar = ' ';
+                    int index = Array.IndexOf(acceptedSymbols, currentCharacter);
+                    index += key;
+                    newChar = acceptedSymbols[index];
+                    encrypted += newChar;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input text");
+                    break;
+                }
+            }
+
+
+            Console.WriteLine("Encrypted text: " + encrypted);
+        }
+
+
+        static void DecryptText()
+        {
+            char[] acceptedSymbols =
+            {
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+                'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '
+            };
+
+            Console.WriteLine("Decrypt text");
+            Console.WriteLine("-------------");
+            Console.WriteLine("Please enter encrypted text to decrypt: ");
+            string userInput = Console.ReadLine();
+            Console.WriteLine("Please enter a shift (between 1 and 36");
+            int key = int.Parse(Console.ReadLine());
+
+            while (true)
+            {
+                if (key > 0 && key < 37) break;
+                Console.WriteLine("Please enter a number within the valid range: ");
+                key = int.Parse((Console.ReadLine()));
+            }
+
+
+            char[] charArray = userInput.ToUpper().ToCharArray();
+            string decrypted = "";
+
+
             for (int i = 0; i < charArray.Length; i++)
             {
                 char currentCharacter = charArray[i];
 
                 if (acceptedSymbols.Contains(currentCharacter))
                 {
-                    char newChar = Convert.ToChar(currentCharacter + key);
-                    encrypted += newChar;
+                    char newChar = Convert.ToChar(currentCharacter - key);
+                    decrypted += newChar;
                 }
                 else
                 {
-                  Console.WriteLine("Invalid input text");
-                  break;
+                    Console.WriteLine("Invalid input text");
+                    break;
                 }
-                
             }
-            
-            Console.WriteLine("Encrypted text: " + encrypted);
-               
-        }
 
-        static void DecryptText()
-        {
-            Console.WriteLine("Decrypt");
+
+            Console.WriteLine("Decrypted text: " + decrypted);
         }
     }
 }
-
-
-
-
