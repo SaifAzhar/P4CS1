@@ -7,9 +7,20 @@ namespace P4CS
 {
     class Program
     {
+        /*
+         TESTING FOR SQUARE ROOT CALCULATOR
+         ----------------------------------
+         Test input = 45
+         Decimal places = 5
+         Expected output = 6.70820
+         Actual output = 6.70821
+         Reasoning = Testing to 5 decimal places
+         */
+
         public static void Main(string[] args)
         {
-            Menu(); // Allows the menu to show when ran
+            Menu();
+            // Allows the menu to show when ran
         }
 
         public static void Menu()
@@ -120,40 +131,40 @@ namespace P4CS
             Console.WriteLine("Square Root Calculator");
             Console.WriteLine("--------------------");
 
-
+            //try catch for user inputs
             Console.WriteLine("Please enter a positive integer: ");
             int userInteger = int.Parse(Console.ReadLine());
 
             Console.WriteLine("How many decimal places do you want the solution to be calculated to?");
             int userChoiceDecimalPlace = int.Parse(Console.ReadLine());
 
-            double upperBound = userInteger;
+            double precision = ((userChoiceDecimalPlace / userChoiceDecimalPlace) /
+                                (Math.Pow(10, userChoiceDecimalPlace)));
+
+            double upperBound = userInteger * 2;
             double lowerBound = 1;
-            double average = 0;
-            
-            Console.WriteLine("Loop SQRT");
 
-            while (true)
+            while ((upperBound - lowerBound) > precision)
             {
-                average = ((upperBound + lowerBound) / 2);
-                average *= average;
+                double average = ((upperBound + lowerBound) / 2);
+                double averageSquared = average * average;
 
-                if (average > userInteger)
+                if (averageSquared > userInteger)
                 {
                     upperBound = average;
                 }
-                else if (average < userInteger)
+                else if (averageSquared < userInteger)
                 {
                     lowerBound = average;
                 }
-                
-                Console.WriteLine(average);
-                
-                if ((upperBound - lowerBound) < userChoiceDecimalPlace)
+
+                if ((upperBound - lowerBound) < precision)
                 {
+                    Console.WriteLine("The square root of " + userInteger + " to " + userChoiceDecimalPlace +
+                                      " decimal places is " + Math.Round(average, userChoiceDecimalPlace));
                     break;
                 }
-            } 
+            }
         }
 
         static void EncryptText()
@@ -195,6 +206,11 @@ namespace P4CS
                     char newChar = ' ';
                     int index = Array.IndexOf(acceptedSymbols, currentCharacter);
                     index += key;
+                    if (index > 37)
+                    {
+                        index = index % 37;
+                    }
+
                     newChar = acceptedSymbols[index];
                     encrypted += newChar;
                 }
@@ -213,48 +229,62 @@ namespace P4CS
         static void DecryptText()
         {
             char[] acceptedSymbols =
-            {
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-                'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '
-            };
-
-            Console.WriteLine("Decrypt text");
-            Console.WriteLine("-------------");
-            Console.WriteLine("Please enter encrypted text to decrypt: ");
-            string userInput = Console.ReadLine();
-            Console.WriteLine("Please enter a shift (between 1 and 36");
-            int key = int.Parse(Console.ReadLine());
-
-            while (true)
-            {
-                if (key > 0 && key < 37) break;
-                Console.WriteLine("Please enter a number within the valid range: ");
-                key = int.Parse((Console.ReadLine()));
-            }
-
-
-            char[] charArray = userInput.ToUpper().ToCharArray();
-            string decrypted = "";
-
-
-            for (int i = 0; i < charArray.Length; i++)
-            {
-                char currentCharacter = charArray[i];
-
-                if (acceptedSymbols.Contains(currentCharacter))
                 {
-                    char newChar = Convert.ToChar(currentCharacter - key);
-                    decrypted += newChar;
-                }
-                else
+                    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+                    'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '
+                };
+
+                Console.WriteLine("Decrypt text");
+                Console.WriteLine("-------------");
+                Console.WriteLine("Please enter encrypted text to decrypt: ");
+
+                string userInput = Console.ReadLine();
+                Console.WriteLine("Please enter a shift between 1 and 36");
+                int key = int.Parse(Console.ReadLine());
+
+                while (true)
                 {
-                    Console.WriteLine("Invalid input text");
-                    break;
+                    if (key > 0 && key < 37) break;
+                    Console.WriteLine("Please enter a number within the valid range: ");
+                    key = int.Parse((Console.ReadLine()));
                 }
-            }
 
 
-            Console.WriteLine("Decrypted text: " + decrypted);
+                char[] charArray = userInput.ToUpper().ToCharArray();
+                string decrypted = "";
+
+
+                for (int i = 0; i < charArray.Length; i++)
+                {
+                    char currentCharacter = charArray[i];
+
+
+                    if (acceptedSymbols.Contains(currentCharacter))
+                    {
+                        char newChar = ' ';
+                        int index = Array.IndexOf(acceptedSymbols, currentCharacter);
+                        index -= key;
+                        if (index < 0)
+                        {
+                            index = Math.Abs(index);
+                            int newIndex = Array.IndexOf(acceptedSymbols, currentCharacter);
+                            index -= newIndex;
+                            index = 37 - index;
+                        }
+
+                        newChar = acceptedSymbols[--index];
+                        decrypted += newChar;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input text");
+                        break;
+                    }
+                }
+
+
+                Console.WriteLine("Decrypted text: " + decrypted);
+            
         }
     }
 }
