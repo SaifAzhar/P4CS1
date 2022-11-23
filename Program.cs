@@ -23,13 +23,13 @@ namespace P4CS
             // Allows the menu to show when ran
         }
 
-        public static void Menu()
+        static void Menu()
         {
             int userInput = 0;
 
             do
             {
-                Console.WriteLine("P4CS Mini Applications");            // These lines simply print out the options for the user to choose from
+                Console.WriteLine("P4CS Mini Applications"); // These lines simply print out the options for the user to choose from
                 Console.WriteLine("----------------------");
                 Console.WriteLine("Please select an option:");
                 Console.WriteLine("1) Keep counting");
@@ -40,7 +40,7 @@ namespace P4CS
 
                 Console.WriteLine("Please enter option: ");
 
-                try                                                     //checking to see if user input is an int. If not then we spit out an error message
+                try //checking to see if user input is an int. If not then we spit out an error message
                 {
                     userInput = int.Parse(Console.ReadLine());
                 }
@@ -49,10 +49,10 @@ namespace P4CS
                     Console.WriteLine(e.Message);
                 }
 
-                switch (userInput)                                      //switch case used to allow user to choose which method (mini app) they want to access
+                switch (userInput) //switch case used to allow user to choose which method (mini app) they want to access
                 {
                     case 1:
-                        KeepCounting();                                 // when the user makes their choice, the switch case opens the method that correlates to the case chosen
+                        KeepCounting(); // when the user makes their choice, the switch case opens the method that correlates to the case chosen
                         break;
                     case 2:
                         SQRT();
@@ -64,39 +64,42 @@ namespace P4CS
                         DecryptText();
                         break;
                 }
-            } while (userInput != 9);                                   //pressing 9 allows them to end the program
+            } while (userInput != 9); //pressing 9 allows them to end the program
         }
 
-        public static void KeepCounting()
+        static void KeepCounting()
         {
             Console.WriteLine("Welcome to keep counting");
             Console.WriteLine("------------------------");
-            Console.WriteLine("You will be presented with 10 arithmetic questions.  After the first question, the left-hand operand is the result of the previous addition.");
+            Console.WriteLine(
+                "You will be presented with 10 arithmetic questions.  After the first question, the left-hand operand is the result of the previous addition.");
 
-            Random num1 = new Random();                         //generates random number for the first question
-            Random num2 = new Random();                         //generates second random number (which will be used for all the questions
-            Random num3 = new Random();     
+            Random num1 = new Random(); //generates random number for the first question
+            Random num2 = new Random(); //generates second random number (which will be used for all the questions
+            Random num3 = new Random();
+            
             string operation = "";
             int correctAnswer = 0;
             int correctAnswerCount = 0;
             int useranswer = 0;
-            int number1 = 0;                                    // set to 0. This value is later changed within the loop when a random number is generated
-            var timer = new Stopwatch();                        //initialise timer to time the duration of the mini app
+            int number1 = 0; // set to 0. This value is later changed within the loop when a random number is generated
+            
+            var timer = new Stopwatch(); //initialise timer to time the duration of the mini app
             timer.Start();
 
             for (int i = 1; i < 11; i++)
             {
                 if (i == 1)
                 {
-                    number1 = num1.Next(1, 11);                 // randomly generates a number for the first operand   
+                    number1 = num1.Next(1, 11); // randomly generates a number for the first operand   
                 }
                 else
                 {
                     number1 = correctAnswer;
                 }
 
-                int number2 = num2.Next(1, 11);                 // second random number given its scope
-                int PorN = num3.Next(1, 3);                     // Positive or negative - Coin flip to determine whether it will be a + or -
+                int number2 = num2.Next(1, 11); // second random number given its scope
+                int PorN = num3.Next(1, 3); // Positive or negative - Coin flip to determine whether it will be a + or -
 
 
                 if (PorN == 1)
@@ -112,7 +115,7 @@ namespace P4CS
 
                 Console.WriteLine("Question " + i + ": " + number1 + " " + operation + " " + number2 + " = ");
 
-                try                                            // checking to see if user input is an int. If not then we spit out an error message
+                try // checking to see if user input is an int. If not then we spit out an error message
                 {
                     useranswer = int.Parse(Console.ReadLine());
                 }
@@ -124,7 +127,7 @@ namespace P4CS
                 if (useranswer == correctAnswer)
                 {
                     Console.WriteLine("Correct answer!");
-                    correctAnswerCount++;                   // increment counter
+                    correctAnswerCount++; // increment counter
                 }
                 else
                 {
@@ -135,8 +138,8 @@ namespace P4CS
             timer.Stop();
 
             TimeSpan timeTaken = timer.Elapsed;
-            string totalTime = "Time taken: " + timeTaken.ToString(@"m\:ss\.fff");      
-            Console.WriteLine(totalTime);                                                       // displaying time taken to complete
+            string totalTime = "Time taken: " + timeTaken.ToString(@"m\:ss\.fff");
+            Console.WriteLine(totalTime); // displaying time taken to complete
             Console.WriteLine("You got " + correctAnswerCount + " out of 10 questions right");
         }
 
@@ -148,8 +151,8 @@ namespace P4CS
 
             int userInteger = 0;
             int userChoiceDecimalPlace = 0;
-            
-            try                                 // checking to see if user input is an int. If not then we spit out an error message
+
+            try // checking to see if user input is an int. If not then we spit out an error message
             {
                 userInteger = int.Parse(Console.ReadLine());
 
@@ -162,10 +165,11 @@ namespace P4CS
                 return;
             }
 
-            double precision = ((userChoiceDecimalPlace / userChoiceDecimalPlace) / (Math.Pow(10, userChoiceDecimalPlace)));        //formula to determine precision 
+            double precision = ((userChoiceDecimalPlace / userChoiceDecimalPlace) /
+                                (Math.Pow(10, userChoiceDecimalPlace))); //formula to determine precision 
 
-            double upperBound = userInteger * 2;                // setting upper bound
-            double lowerBound = 1;                              //setting lower bound (purposely made them very broad so they can be narrowed down during run time
+            double upperBound = userInteger * 2; // setting upper bound
+            double lowerBound = 1; //setting lower bound (purposely made them very broad so they can be narrowed down during run time
 
             while ((upperBound - lowerBound) > precision)
             {
@@ -174,17 +178,17 @@ namespace P4CS
 
                 if (averageSquared > userInteger)
                 {
-                    upperBound = average;                       //reassigning upper bound if the average is higher than the number they originally gave
+                    upperBound = average; //reassigning upper bound if the average is higher than the number they originally gave
                 }
                 else if (averageSquared < userInteger)
                 {
-                    lowerBound = average;                       //reassigning lower bound if the average is lower than the number they originally gave
+                    lowerBound = average; //reassigning lower bound if the average is lower than the number they originally gave
                 }
 
-                if ((upperBound - lowerBound) < precision)      // checks to see if the difference between the bounds is smaller than the precision. If it is we know to conclude the program.
+                if ((upperBound - lowerBound) <
+                    precision) // checks to see if the difference between the bounds is smaller than the precision. If it is we know to conclude the program.
                 {
-                    Console.WriteLine("The square root of " + userInteger + " to " + userChoiceDecimalPlace +
-                                      " decimal places is " + Math.Round(average, userChoiceDecimalPlace));
+                    Console.WriteLine("The square root of " + userInteger + " to " + userChoiceDecimalPlace + " decimal places is " + Math.Round(average, userChoiceDecimalPlace));
                     break;
                 }
             }
@@ -192,8 +196,6 @@ namespace P4CS
 
         static void EncryptText()
         {
-            // convert acceptedSymbols to char[] 'A' 'B' 
-            // string to char[]
             char[] acceptedSymbols =
             {
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
@@ -206,27 +208,27 @@ namespace P4CS
 
             string userInput = "";
             int key = 0;
-            
-            try                                             // checking to see if user input is an int. If not then we spit out an error message
+
+            try // checking to see if user input is an int. If not then we spit out an error message
             {
                 userInput = Console.ReadLine();
                 Console.WriteLine("Please enter key between 1 and 36: ");
                 key = int.Parse((Console.ReadLine()));
 
-                while (true)                                // making sure their input for their key is within the bounds of 1 and 36 and returning a message if it is not
+                while (true) // making sure their input for their key is within the bounds of 1 and 36 and returning a message if it is not
                 {
                     if (key > 0 && key < 37) break;
                     Console.WriteLine("Please enter a number within the valid range: ");
                     key = int.Parse((Console.ReadLine()));
                 }
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return;
             }
 
-            char[] charArray = userInput.ToUpper().ToCharArray();   //creating a new array for the chars to be stored. Storing them all as capitals
+            char[] charArray = userInput.ToUpper().ToCharArray(); //creating a new array for the chars to be stored. Storing them all as capitals
             string encrypted = "";
 
 
@@ -235,18 +237,18 @@ namespace P4CS
                 char currentCharacter = charArray[i];
 
 
-                if (acceptedSymbols.Contains(currentCharacter))                         // checking to see if the char is contained in the accepted symbols array
+                if (acceptedSymbols.Contains(currentCharacter)) // checking to see if the char is contained in the accepted symbols array
                 {
                     char newChar = ' ';
-                    int index = Array.IndexOf(acceptedSymbols, currentCharacter);       // finds index of the current char in the array
-                    index += key;                                                       // adjusts the index to find the char in the new index position 
+                    int index = Array.IndexOf(acceptedSymbols, currentCharacter); // finds index of the current char in the array
+                    index += key; // adjusts the index to find the char in the new index position 
                     if (index > 37)
                     {
-                        index = index % 37;                                             // returns the index to the beginning of the array
+                        index = index % 37; // returns the index to the beginning of the array
                     }
 
-                    newChar = acceptedSymbols[index];                                   //retrieves the char in the new index position
-                    encrypted += newChar;                                               //adds the char to the encrypted message
+                    newChar = acceptedSymbols[index]; //retrieves the char in the new index position
+                    encrypted += newChar; //adds the char to the encrypted message
                 }
                 else
                 {
@@ -274,14 +276,15 @@ namespace P4CS
             Console.WriteLine("-------------");
             Console.WriteLine("Please enter encrypted text to decrypt: ");
 
-            try                                                                 // checking to see if user input is an int. If not then we spit out an error message
+            try // checking to see if user input is an int. If not then we spit out an error message
             {
                 userInput = Console.ReadLine();
                 Console.WriteLine("Please enter a shift between 1 and 36");
                 key = int.Parse(Console.ReadLine());
 
 
-                while (true)                                                    // making sure their input for their key is within the bounds of 1 and 36 and returning a message if it is not
+                while
+                    (true) // making sure their input for their key is within the bounds of 1 and 36 and returning a message if it is not
                 {
                     if (key > 0 && key < 37) break;
                     Console.WriteLine("Please enter a number within the valid range: ");
@@ -294,7 +297,9 @@ namespace P4CS
                 return;
             }
 
-            char[] charArray = userInput.ToUpper().ToCharArray();                //creating a new array for the chars to be stored. Storing them all as capitals
+            char[]
+                charArray = userInput.ToUpper()
+                    .ToCharArray(); //creating a new array for the chars to be stored. Storing them all as capitals
             string decrypted = "";
 
 
@@ -303,26 +308,26 @@ namespace P4CS
                 char currentCharacter = charArray[i];
 
 
-                if (acceptedSymbols.Contains(currentCharacter))                 // checking to see if the char is contained in the accepted symbols array
+                if (acceptedSymbols.Contains(currentCharacter)) // checking to see if the char is contained in the accepted symbols array
                 {
                     char newChar = ' ';
-                    int index = Array.IndexOf(acceptedSymbols, currentCharacter);           // finds index of the current char in the array
-                    index -= key;                                                           // adjusts the index to find the char in the new index position
-                    
-                    if (index < 0)                                                          //if the index is lower than 0, then we ABS the value to make it positive
-                    {                                                                           
-                        index = Math.Abs(index);        
-                        int newIndex = Array.IndexOf(acceptedSymbols, currentCharacter);    //we find the index of the current character we are trying to decrypt
-                        index -= newIndex;                                                  //find the difference between the current position and index
-                        index = 37 - index;                                                 //subtract the difference from 37 to find the updated index of the character from the back end of the array
+                    int index = Array.IndexOf(acceptedSymbols, currentCharacter); // finds index of the current char in the array
+                    index -= key; // adjusts the index to find the char in the new index position
+
+                    if (index < 0) //if the index is lower than 0, then we ABS the value to make it positive
+                    {
+                        index = Math.Abs(index);
+                        int newIndex = Array.IndexOf(acceptedSymbols, currentCharacter); //we find the index of the current character we are trying to decrypt
+                        index -= newIndex; //find the difference between the current position and index
+                        index = 37 - index; //subtract the difference from 37 to find the updated index of the character from the back end of the array
                     }
 
-                    newChar = acceptedSymbols[--index];                                     //retrieves the char in the new index position
-                    decrypted += newChar;                                                   //adds char to the decrypted message
+                    newChar = acceptedSymbols[--index]; //retrieves the char in the new index position
+                    decrypted += newChar; //adds char to the decrypted message
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input text");                                //otherwise we throw an error message
+                    Console.WriteLine("Invalid input text"); //otherwise we throw an error message
                     break;
                 }
             }
