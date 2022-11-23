@@ -71,8 +71,7 @@ namespace P4CS
         {
             Console.WriteLine("Welcome to keep counting");
             Console.WriteLine("------------------------");
-            Console.WriteLine(
-                "You will be presented with 10 arithmetic questions.  After the first question, the left-hand operand is the result of the previous addition.");
+            Console.WriteLine("You will be presented with 10 arithmetic questions.  After the first question, the left-hand operand is the result of the previous addition.");
 
             Random num1 = new Random(); //generates random number for the first question
             Random num2 = new Random(); //generates second random number (which will be used for all the questions
